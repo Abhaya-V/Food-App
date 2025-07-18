@@ -14,7 +14,7 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/admin/login", {
+      const res = await axios.post("https://food-appback.vercel.app/admin/login", {
         email: email.toLowerCase(),
         password,
       });

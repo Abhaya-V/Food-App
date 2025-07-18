@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosInstance from "../../../axiosInterceptor";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios"
 
 const SellerLogin = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ const SellerLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axiosInstance.post("/seller/login", { email, password });
+      const res = await axios.post("https://food-appback.vercel.app/seller/login", { email, password });
       sessionStorage.setItem("token", res.data.token);
       navigate("/seller/dashboard");
     } catch (err) {

@@ -12,7 +12,7 @@ useEffect(() => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const res = await axiosInstance.get("http://localhost:8000/api/cart/get/user");
+      const res = await axiosInstance.get("/api/cart/get/user");
       setCartItems(res.data);
       updateCartCount(res.data);
     } catch (err) {
@@ -31,7 +31,7 @@ useEffect(() => {
   const handleQuantity = (foodId, delta) => {
     const action = delta === 1 ? "increase" : "decrease";
     axiosInstance
-      .put("http://localhost:8000/api/cart/update", { foodId, action })
+      .put("/api/cart/update", { foodId, action })
       .then((res) => {
         let updatedCart;
         if (res.data.message === "Item removed") {
@@ -50,7 +50,7 @@ useEffect(() => {
 
   const handleDelete = (foodId) => {
     axiosInstance
-      .delete("http://localhost:8000/api/cart/delete", { data: { foodId } })
+      .delete("/api/cart/delete", { data: { foodId } })
       .then(() => {
         const updatedCart = cartItems.filter((item) => item.foodId._id !== foodId);
         setCartItems(updatedCart);

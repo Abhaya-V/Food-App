@@ -14,7 +14,7 @@ const MyOrder = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axiosInstance.get("http://localhost:8000/api/order/getMyOrder");
+      const res = await axiosInstance.get("/api/order/getMyOrder");
       setOrders(res.data);
     } catch (err) {
       console.error("Failed to fetch orders", err);
@@ -36,7 +36,7 @@ const handleSubmitReview = async ({ rating, comment }) => {
   try {
     const { orderId, foodId, type } = currentReview;
 
-    await axiosInstance.post("http://localhost:8000/api/reviews/submit", {
+    await axiosInstance.post("/api/reviews/submit", {
       orderId,
       foodId,
       type,
@@ -47,7 +47,7 @@ const handleSubmitReview = async ({ rating, comment }) => {
         : null,
     });
 
-    // ✅ Update orders state in-memory
+    // Update orders state in-memory
     setOrders(prevOrders =>
       prevOrders.map(order => {
         if (order._id !== orderId) return order;

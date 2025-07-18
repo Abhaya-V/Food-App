@@ -20,7 +20,7 @@ const AdminChangePassword = () => {
     }
     try {
       const res = await axiosInstance.put(
-        "http://localhost:8000/admin/update",
+        "/admin/update",
         {
           email,
           newPassword,

@@ -14,7 +14,7 @@ const Foodlist = () => {
   const handleAddToCart = async (foodId, restaurantId) => {
     try {
       const res = await axiosInstance.get(
-        "http://localhost:8000/api/cart/get/user"
+        "/api/cart/get/user"
       );
       const existingCart = res.data;
       if (existingCart.length > 0) {
@@ -25,10 +25,10 @@ const Foodlist = () => {
             "Your cart has items from another restaurant. Clear cart and continue?"
           );
           if (!confirmClear) return;
-          await axiosInstance.post("http://localhost:8000/api/cart/clear");
+          await axiosInstance.post("/api/cart/clear");
         }
       }
-      await axiosInstance.post("http://localhost:8000/api/cart/add", {
+      await axiosInstance.post("/api/cart/add", {
         foodId,
       });
       navigate("/cart");
@@ -42,13 +42,13 @@ const Foodlist = () => {
       try {
         setLoading(true);
         const userRes = await axiosInstance.get(
-          "http://localhost:8000/api/users/user-info"
+          "/api/users/user-info"
         );
         const userCity = userRes.data.location?.city?.toLowerCase();
 
         const [foodRes, restaurantRes] = await Promise.all([
-          axiosInstance.get("http://localhost:8000/api/foods/get"),
-          axiosInstance.get("http://localhost:8000/api/restaurant/get"),
+          axiosInstance.get("/api/foods/get"),
+          axiosInstance.get("/api/restaurant/get"),
         ]);
 
         const allFoods = foodRes.data;

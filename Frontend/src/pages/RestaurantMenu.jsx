@@ -16,7 +16,7 @@ useEffect(() => {
     try {
       setLoading(true);
       const foodRes = await axiosInstance.get(
-        `http://localhost:8000/api/foods/get/byRestaurant/${id}`
+        `/api/foods/get/byRestaurant/${id}`
       );
       setFoods(foodRes.data);
     } catch (err) {
@@ -30,8 +30,8 @@ useEffect(() => {
 
 // Fetch restaurant info
 useEffect(() => {
-  axiosInstance
-    .get(`http://localhost:8000/api/restaurant/get`)
+  axios
+    .get(`https://food-appback.vercel.app/api/restaurant/get`)
     .then((res) => {
       const match = res.data.find((r) => r._id === id);
       setRestaurant(match);
@@ -42,7 +42,7 @@ useEffect(() => {
   const handleAddToCart = async (foodId, restaurantId) => {
     try {
       const res = await axiosInstance.get(
-        "http://localhost:8000/api/cart/get/user"
+        "/api/cart/get/user"
       )
       const existingCart = res.data
         // checks whether the food items in cart are same res
@@ -54,11 +54,11 @@ useEffect(() => {
             "Your cart has items from another restaurant. Clear cart and continue?"
           )
           if (!confirmClear) return
-          await axiosInstance.post("http://localhost:8000/api/cart/clear")
+          await axiosInstance.post("/api/cart/clear")
         }
       }
       // Proceed to add
-      await axiosInstance.post("http://localhost:8000/api/cart/add", {
+      await axiosInstance.post("/api/cart/add", {
         foodId
       })
       navigate("/cart")

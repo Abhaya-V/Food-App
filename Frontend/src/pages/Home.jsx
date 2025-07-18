@@ -44,14 +44,14 @@ const Home = () => {
     try {
       // Try to get user if logged in
       const userRes = await axiosInstance.get(
-        "http://localhost:8000/api/users/user-info"
+        "/api/users/user-info"
       );
       const user = userRes.data;
 
       if (!user.location?.city) {
         const { lat, lon } = await detectLocation();
         await axiosInstance.put(
-          "http://localhost:8000/api/users/update-location",
+          "/api/users/update-location",
           { lat, lon }
         );
         console.log(" Location updated");
@@ -97,9 +97,9 @@ const Home = () => {
   const fetchData = async (cityKeyword = "") => {
     try {
       const [resRes, catRes, foodRes] = await Promise.all([
-        axios.get("http://localhost:8000/api/restaurant/get"),
-        axios.get("http://localhost:8000/api/categories/get"),
-        axios.get("http://localhost:8000/api/foods/get"),
+        axios.get("https://food-appback.vercel.app/api/restaurant/get"),
+        axios.get("https://food-appback.vercel.app/api/categories/get"),
+        axios.get("https://food-appback.vercel.app/api/foods/get"),
       ]);
 
       const filteredRestaurants = cityKeyword

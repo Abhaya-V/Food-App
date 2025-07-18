@@ -54,7 +54,7 @@ const Signup = () => {
     // validation
     if (!validateForm()) return
     axios
-      .post("http://localhost:8000/api/users/register", formData)
+      .post("https://food-appback.vercel.app/api/users/register", formData)
       .then((res) => {
         alert(res.data.message)
         navigate("/verify")

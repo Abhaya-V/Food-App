@@ -52,7 +52,7 @@ const ConfirmPage = () => {
 
         const fullAddress = `${shippingInfo.address}, ${shippingInfo.city}`;
         const geoRes = await axios.get(
-          `http://localhost:8000/api/geocode/coords?address=${encodeURIComponent(
+          `https://food-appback.vercel.app/api/geocode/coords?address=${encodeURIComponent(
             fullAddress
           )}`
         );

@@ -13,9 +13,9 @@ const PaymentPage = ({ setCartCount }) => {
     const triggerPayment = async () => {
       try {
         // taking key from backend
-         const key = await axiosInstance.get("http://localhost:8000/api/payment/get-key")
+         const key = await axiosInstance.get("/api/payment/get-key")
         // taking finalamount
-        const res = await axiosInstance.post("http://localhost:8000/api/payment/create-order", {
+        const res = await axiosInstance.post("/api/payment/create-order", {
           amount: finalAmount,
         })
 
@@ -28,9 +28,9 @@ const PaymentPage = ({ setCartCount }) => {
           order_id: res.data.id,
           handler: async function (response) {
             // verify the razorpay signature
-            await axiosInstance.post("http://localhost:8000/api/payment/verify", response)
+            await axiosInstance.post("/api/payment/verify", response)
             // order create
-            const orderRes = await axiosInstance.post("http://localhost:8000/api/order/create", {
+            const orderRes = await axiosInstance.post("/api/order/create", {
               cartItems: cartItems.map((item) => ({
                 foodId: item.foodId._id,
                 quantity: item.quantity,
@@ -42,7 +42,7 @@ const PaymentPage = ({ setCartCount }) => {
 
             const orderID = orderRes.data.order.orderId;
             // clearing cart
-            await axiosInstance.post("http://localhost:8000/api/cart/clear");
+            await axiosInstance.post("/api/cart/clear");
             setCartCount(0);
             navigate("/ordersuccess", { state: { order_id: orderID } });
           },

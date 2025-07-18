@@ -13,7 +13,7 @@ const FoodDetails = () => {
     const fetchFood = async () => {
       try {
         const res = await axiosInstance.get(
-          `http://localhost:8000/api/foods/get/${id}`
+          `/api/foods/get/${id}`
         );
         setFood(res.data);
       } catch (err) {
@@ -30,7 +30,7 @@ const FoodDetails = () => {
     try {
       setAdding(true);
       const res = await axiosInstance.get(
-        "http://localhost:8000/api/cart/get/user"
+        "/api/cart/get/user"
       );
       const existingCart = res.data;
 
@@ -45,11 +45,11 @@ const FoodDetails = () => {
           );
           if (!confirmClear) return;
           // Clear existing cart
-          await axiosInstance.post("http://localhost:8000/api/cart/clear");
+          await axiosInstance.post("/api/cart/clear");
         }
       }
       // Add current item to cart
-      await axiosInstance.post("http://localhost:8000/api/cart/add", {
+      await axiosInstance.post("/api/cart/add", {
         foodId: food._id,
       });
       navigate("/cart");

@@ -22,7 +22,7 @@ const Shipping = ({ setShippingInfo }) => {
   useEffect(() => {
     const fetchLatestShipping = async () => {
       try {
-        const res = await axiosInstance.get("http://localhost:8000/api/order/latest-shipping");
+        const res = await axiosInstance.get("/api/order/latest-shipping");
         const info = res.data.shippingInfo;
         if (info?.address && info.city && info.pincode) {
           setSavedAddress(info);
