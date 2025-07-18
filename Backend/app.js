@@ -33,6 +33,9 @@ app.use("/seller",sellerRoutes)
 app.use("/api/geocode", geocodeRoute);
 app.use("/api/reviews", reviewRoutes);
 
+app.get("/", (req, res) => {
+    res.send("API is running");
+  });
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
